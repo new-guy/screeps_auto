@@ -1,0 +1,28 @@
+# Initial design
+
+- Use a very basic OS
+	- Processes have different priorities
+	- Processes live until they are deleted
+	- Processes have meaningful, unique names
+	- Processes have the following stages:
+		- Init
+		- Run
+		- End
+	- Priority queue of processes to be processed.  Bump priority when processes haven't been run
+	- We'll need a few processes to run permanently.
+		- Update rooms
+		- Update empire
+	- Examples of processes:
+		- Room process is running for each room.  
+			-Room process has a conditions under which to ensures sub-processes.  
+			- It ensures the manageLayout() process if the room is claimed.
+			- manageLayout() is constantly checking what level the room is, and ensures it has subprocesses for all buildings.  When it spawns them, give them a position
+				-process manageLayout() ensures process manageBuilders(thisRoom):
+					-ensures a number and size of builders based upon the state of the room
+				-process manageLayout() ensures process manageLinks(thisRoom)
+					-manageLinks(thisRoom) ensures the following processes exist:
+						- One process for each link that could exist in the room.  When spawning this process, ensure it has a position.
+						- One process for controlling link transfers
+- Completely autonomous
+- Good logging
+- Good visual displays
